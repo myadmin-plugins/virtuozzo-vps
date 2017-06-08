@@ -15,10 +15,10 @@ return [
 	'version' => '1.0.0',
 	'type' => 'licenses',
 	'hooks' => [
-		'function.requirements' => ['Detain\MyAdminVirtuozzo\Plugin', 'Requirements'],
+		/*'function.requirements' => ['Detain\MyAdminVirtuozzo\Plugin', 'Requirements'],
 		'licenses.settings' => ['Detain\MyAdminVirtuozzo\Plugin', 'Settings'],
 		'licenses.activate' => ['Detain\MyAdminVirtuozzo\Plugin', 'Activate'],
 		'licenses.change_ip' => ['Detain\MyAdminVirtuozzo\Plugin', 'ChangeIp'],
-		'ui.menu' => ['Detain\MyAdminVirtuozzo\Plugin', 'Menu']
+		'ui.menu' => ['Detain\MyAdminVirtuozzo\Plugin', 'Menu'] */
 	],
 ];

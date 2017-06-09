@@ -15,8 +15,8 @@ return [
 	'version' => '1.0.0',
 	'type' => 'service',
 	'hooks' => [
-		/*'function.requirements' => ['Detain\MyAdminVirtuozzo\Plugin', 'Requirements'],
 		'vps.settings' => ['Detain\MyAdminVirtuozzo\Plugin', 'Settings'],
+		/*'function.requirements' => ['Detain\MyAdminVirtuozzo\Plugin', 'Requirements'],
 		'vps.activate' => ['Detain\MyAdminVirtuozzo\Plugin', 'Activate'],
 		'vps.change_ip' => ['Detain\MyAdminVirtuozzo\Plugin', 'ChangeIp'],
 		'ui.menu' => ['Detain\MyAdminVirtuozzo\Plugin', 'Menu'] */

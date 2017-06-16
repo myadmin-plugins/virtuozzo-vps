@@ -19,7 +19,7 @@ class Plugin {
 
 	public static function Hooks() {
 		return [
-			'vps.settings' => ['Detain\MyAdminVirtuozzo\Plugin', 'Settings'],
+			'vps.settings' => [__CLASS__, 'Settings'],
 		];
 	}
 

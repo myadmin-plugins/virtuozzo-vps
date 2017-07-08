@@ -7,9 +7,9 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 
 class Plugin {
 
-	public static $name = 'Virtuozzo Vps';
-	public static $description = 'Allows selling of Virtuozzo Server and VPS License Types.  More info at https://www.netenberg.com/virtuozzo.php';
-	public static $help = 'It provides more than one million end users the ability to quickly install dozens of the leading open source content management systems into their web space.  	Must have a pre-existing cPanel license with cPanelDirect to purchase a virtuozzo license. Allow 10 minutes for activation.';
+	public static $name = 'Virtuozzo VPS';
+	public static $description = 'Allows selling of Virtuozzo VPS Types.  Virtuozzo is an operating system-level server virtualization solution designed to centralize server management and consolidate workloads, which reduces overhead by reducing the number of physical servers required. Organizations use Virtuozzo for server consolidation, disaster recovery, and server workload agility. Virtuozzo does not generate a virtual machine that resides on a host OS so that users can run multiple operating systems. Instead it creates isolated virtual private servers (VPSs) on a single physical server. For instance, the software can run multiple Linux VPSs, but not Linux and Windows at the same time on the same server. Each VPS performs exactly like a stand-alone server and can be rebooted independently.  More info at https://virtuozzo.com/';
+	public static $help = '';
 	public static $module = 'vps';
 	public static $type = 'service';
 
@@ -20,12 +20,13 @@ class Plugin {
 	public static function getHooks() {
 		return [
 			self::$module.'.settings' => [__CLASS__, 'getSettings'],
+			self::$module.'.deactivate' => [__CLASS__, 'getDeactivate'],
 		];
 	}
 
 	public static function getActivate(GenericEvent $event) {
 		$serviceClass = $event->getSubject();
-		if ($event['category'] == SERVICE_TYPES_FANTASTICO) {
+		if ($event['category'] == SERVICE_TYPES_VIRTUOZZO) {
 			myadmin_log(self::$module, 'info', 'Virtuozzo Activation', __LINE__, __FILE__);
 			function_requirements('activate_virtuozzo');
 			activate_virtuozzo($serviceClass->getIp(), $event['field1']);
@@ -33,8 +34,16 @@ class Plugin {
 		}
 	}
 
+	public static function getDeactivate(GenericEvent $event) {
+		if ($event['category'] == SERVICE_TYPES_VIRTUOZZO) {
+			myadmin_log(self::$module, 'info', self::$name.' Deactivation', __LINE__, __FILE__);
+			$serviceClass = $event->getSubject();
+			$GLOBALS['tf']->history->add(self::$module.'queue', $serviceClass->getId(), 'delete', '', $serviceClass->getCustid());
+		}
+	}
+
 	public static function getChangeIp(GenericEvent $event) {
-		if ($event['category'] == SERVICE_TYPES_FANTASTICO) {
+		if ($event['category'] == SERVICE_TYPES_VIRTUOZZO) {
 			$serviceClass = $event->getSubject();
 			$settings = get_module_settings(self::$module);
 			$virtuozzo = new Virtuozzo(FANTASTICO_USERNAME, FANTASTICO_PASSWORD);

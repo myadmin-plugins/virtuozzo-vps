@@ -94,8 +94,8 @@ class Plugin {
 		$settings->add_text_setting(self::$module, 'Slice Costs', 'vps_slice_ssd_virtuozzo_cost', 'SSD Virtuozzo VPS Cost Per Slice:', 'SSD OpenVZ VPS will cost this much for 1 slice.', $settings->get_setting('VPS_SLICE_SSD_VIRTUOZZO_COST'));
 		$settings->add_select_master(self::$module, 'Default Servers', self::$module, 'new_vps_virtuozzo_server', 'Virtuozzo NJ Server', NEW_VPS_VIRTUOZZO_SERVER, 12, 1);
 		$settings->add_select_master(self::$module, 'Default Servers', self::$module, 'new_vps_ssd_virtuozzo_server', 'SSD Virtuozzo NJ Server', NEW_VPS_SSD_VIRTUOZZO_SERVER, 13, 1);
-		$settings->add_dropdown_setting(self::$module, 'Out of Stock', 'outofstock_virtuozzo', 'Out Of Stock Virtuozzo Secaucus', 'Enable/Disable Sales Of This Type', $settings->get_setting('OUTOFSTOCK_VIRTUOZZO'), array('0', '1'), array('No', 'Yes',));
-		$settings->add_dropdown_setting(self::$module, 'Out of Stock', 'outofstock_ssd_virtuozzo', 'Out Of Stock SSD Virtuozzo Secaucus', 'Enable/Disable Sales Of This Type', $settings->get_setting('OUTOFSTOCK_SSD_VIRTUOZZO'), array('0', '1'), array('No', 'Yes',));
+		$settings->add_dropdown_setting(self::$module, 'Out of Stock', 'outofstock_virtuozzo', 'Out Of Stock Virtuozzo Secaucus', 'Enable/Disable Sales Of This Type', $settings->get_setting('OUTOFSTOCK_VIRTUOZZO'), ['0', '1'], ['No', 'Yes']);
+		$settings->add_dropdown_setting(self::$module, 'Out of Stock', 'outofstock_ssd_virtuozzo', 'Out Of Stock SSD Virtuozzo Secaucus', 'Enable/Disable Sales Of This Type', $settings->get_setting('OUTOFSTOCK_SSD_VIRTUOZZO'), ['0', '1'], ['No', 'Yes']);
 	}
 
 }

@@ -87,8 +87,8 @@ class Plugin {
 	public static function getMenu(GenericEvent $event) {
 		$menu = $event->getSubject();
 		if ($GLOBALS['tf']->ima == 'admin') {
-			$menu->add_link(self::$module, 'choice=none.reusable_virtuozzo', 'icons/database_warning_48.png', 'ReUsable Virtuozzo Licenses');
-			$menu->add_link(self::$module, 'choice=none.virtuozzo_list', 'icons/database_warning_48.png', 'Virtuozzo Licenses Breakdown');
+			$menu->add_link(self::$module, 'choice=none.reusable_virtuozzo', 'images/icons/database_warning_48.png', 'ReUsable Virtuozzo Licenses');
+			$menu->add_link(self::$module, 'choice=none.virtuozzo_list', 'images/icons/database_warning_48.png', 'Virtuozzo Licenses Breakdown');
 			$menu->add_link(self::$module.'api', 'choice=none.virtuozzo_licenses_list', 'whm/createacct.gif', 'List all Virtuozzo Licenses');
 		}
 	}

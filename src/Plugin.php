@@ -144,7 +144,7 @@ class Plugin {
 	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
 	 */
 	public static function getQueueBackup(GenericEvent $event) {
-		if (in_array($event['type'], [get_service_define('KVM_LINUX'), get_service_define('KVM_WINDOWS'), get_service_define('CLOUD_KVM_LINUX'), get_service_define('CLOUD_KVM_WINDOWS')])) {
+		if (in_array($event['type'], [get_service_define('VIRTUOZZO'), get_service_define('SSD_VIRTUOZZO')])) {
 			myadmin_log(self::$module, 'info', self::$name.' Queue Backup', __LINE__, __FILE__);
 			$serviceClass = $event->getSubject();
 			$smarty = new \TFSmarty();
@@ -164,7 +164,7 @@ class Plugin {
 	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
 	 */
 	public static function getQueueRestore(GenericEvent $event) {
-		if (in_array($event['type'], [get_service_define('KVM_LINUX'), get_service_define('KVM_WINDOWS'), get_service_define('CLOUD_KVM_LINUX'), get_service_define('CLOUD_KVM_WINDOWS')])) {
+		if (in_array($event['type'], [get_service_define('VIRTUOZZO'), get_service_define('SSD_VIRTUOZZO')])) {
 			myadmin_log(self::$module, 'info', self::$name.' Queue Restore', __LINE__, __FILE__);
 			$serviceClass = $event->getSubject();
 			$smarty = new \TFSmarty();
@@ -184,7 +184,7 @@ class Plugin {
 	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
 	 */
 	public static function getQueueInstallCpanel(GenericEvent $event) {
-		if (in_array($event['type'], [get_service_define('KVM_LINUX'), get_service_define('KVM_WINDOWS'), get_service_define('CLOUD_KVM_LINUX'), get_service_define('CLOUD_KVM_WINDOWS')])) {
+		if (in_array($event['type'], [get_service_define('VIRTUOZZO'), get_service_define('SSD_VIRTUOZZO')])) {
 			myadmin_log(self::$module, 'info', self::$name.' Queue Install CPanel', __LINE__, __FILE__);
 			$serviceClass = $event->getSubject();
 			$smarty = new \TFSmarty();
@@ -204,7 +204,7 @@ class Plugin {
 	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
 	 */
 	public static function getQueueEnable(GenericEvent $event) {
-		if (in_array($event['type'], [get_service_define('KVM_LINUX'), get_service_define('KVM_WINDOWS'), get_service_define('CLOUD_KVM_LINUX'), get_service_define('CLOUD_KVM_WINDOWS')])) {
+		if (in_array($event['type'], [get_service_define('VIRTUOZZO'), get_service_define('SSD_VIRTUOZZO')])) {
 			myadmin_log(self::$module, 'info', self::$name.' Queue Enable', __LINE__, __FILE__);
 			$serviceClass = $event->getSubject();
 			$smarty = new \TFSmarty();
@@ -224,7 +224,7 @@ class Plugin {
 	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
 	 */
 	public static function getQueueDestroy(GenericEvent $event) {
-		if (in_array($event['type'], [get_service_define('KVM_LINUX'), get_service_define('KVM_WINDOWS'), get_service_define('CLOUD_KVM_LINUX'), get_service_define('CLOUD_KVM_WINDOWS')])) {
+		if (in_array($event['type'], [get_service_define('VIRTUOZZO'), get_service_define('SSD_VIRTUOZZO')])) {
 			myadmin_log(self::$module, 'info', self::$name.' Queue Destroy', __LINE__, __FILE__);
 			$serviceClass = $event->getSubject();
 			$smarty = new \TFSmarty();
@@ -244,7 +244,7 @@ class Plugin {
 	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
 	 */
 	public static function getQueueDelete(GenericEvent $event) {
-		if (in_array($event['type'], [get_service_define('KVM_LINUX'), get_service_define('KVM_WINDOWS'), get_service_define('CLOUD_KVM_LINUX'), get_service_define('CLOUD_KVM_WINDOWS')])) {
+		if (in_array($event['type'], [get_service_define('VIRTUOZZO'), get_service_define('SSD_VIRTUOZZO')])) {
 			myadmin_log(self::$module, 'info', self::$name.' Queue Delete', __LINE__, __FILE__);
 			$serviceClass = $event->getSubject();
 			$smarty = new \TFSmarty();
@@ -264,7 +264,7 @@ class Plugin {
 	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
 	 */
 	public static function getQueueReinstallOsupdateHdsize(GenericEvent $event) {
-		if (in_array($event['type'], [get_service_define('KVM_LINUX'), get_service_define('KVM_WINDOWS'), get_service_define('CLOUD_KVM_LINUX'), get_service_define('CLOUD_KVM_WINDOWS')])) {
+		if (in_array($event['type'], [get_service_define('VIRTUOZZO'), get_service_define('SSD_VIRTUOZZO')])) {
 			myadmin_log(self::$module, 'info', self::$name.' Queue Reinstall Osupdate Hdsize', __LINE__, __FILE__);
 			$serviceClass = $event->getSubject();
 			$smarty = new \TFSmarty();
@@ -284,7 +284,7 @@ class Plugin {
 	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
 	 */
 	public static function getQueueEnableQuota(GenericEvent $event) {
-		if (in_array($event['type'], [get_service_define('KVM_LINUX'), get_service_define('KVM_WINDOWS'), get_service_define('CLOUD_KVM_LINUX'), get_service_define('CLOUD_KVM_WINDOWS')])) {
+		if (in_array($event['type'], [get_service_define('VIRTUOZZO'), get_service_define('SSD_VIRTUOZZO')])) {
 			myadmin_log(self::$module, 'info', self::$name.' Queue Enable Quota', __LINE__, __FILE__);
 			$serviceClass = $event->getSubject();
 			$smarty = new \TFSmarty();
@@ -304,7 +304,7 @@ class Plugin {
 	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
 	 */
 	public static function getQueueDisableQuota(GenericEvent $event) {
-		if (in_array($event['type'], [get_service_define('KVM_LINUX'), get_service_define('KVM_WINDOWS'), get_service_define('CLOUD_KVM_LINUX'), get_service_define('CLOUD_KVM_WINDOWS')])) {
+		if (in_array($event['type'], [get_service_define('VIRTUOZZO'), get_service_define('SSD_VIRTUOZZO')])) {
 			myadmin_log(self::$module, 'info', self::$name.' Queue Disable Quota', __LINE__, __FILE__);
 			$serviceClass = $event->getSubject();
 			$smarty = new \TFSmarty();
@@ -325,7 +325,7 @@ class Plugin {
 	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
 	 */
 	public static function getQueueStart(GenericEvent $event) {
-		if (in_array($event['type'], [get_service_define('KVM_LINUX'), get_service_define('KVM_WINDOWS'), get_service_define('CLOUD_KVM_LINUX'), get_service_define('CLOUD_KVM_WINDOWS')])) {
+		if (in_array($event['type'], [get_service_define('VIRTUOZZO'), get_service_define('SSD_VIRTUOZZO')])) {
 			myadmin_log(self::$module, 'info', self::$name.' Queue Start', __LINE__, __FILE__);
 			$serviceClass = $event->getSubject();
 			$smarty = new \TFSmarty();
@@ -345,7 +345,7 @@ class Plugin {
 	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
 	 */
 	public static function getQueueStop(GenericEvent $event) {
-		if (in_array($event['type'], [get_service_define('KVM_LINUX'), get_service_define('KVM_WINDOWS'), get_service_define('CLOUD_KVM_LINUX'), get_service_define('CLOUD_KVM_WINDOWS')])) {
+		if (in_array($event['type'], [get_service_define('VIRTUOZZO'), get_service_define('SSD_VIRTUOZZO')])) {
 			myadmin_log(self::$module, 'info', self::$name.' Queue Stop', __LINE__, __FILE__);
 			$serviceClass = $event->getSubject();
 			$smarty = new \TFSmarty();
@@ -365,7 +365,7 @@ class Plugin {
 	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
 	 */
 	public static function getQueueRestart(GenericEvent $event) {
-		if (in_array($event['type'], [get_service_define('KVM_LINUX'), get_service_define('KVM_WINDOWS'), get_service_define('CLOUD_KVM_LINUX'), get_service_define('CLOUD_KVM_WINDOWS')])) {
+		if (in_array($event['type'], [get_service_define('VIRTUOZZO'), get_service_define('SSD_VIRTUOZZO')])) {
 			myadmin_log(self::$module, 'info', self::$name.' Queue Restart', __LINE__, __FILE__);
 			$serviceClass = $event->getSubject();
 			$smarty = new \TFSmarty();
@@ -385,7 +385,7 @@ class Plugin {
 	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
 	 */
 	public static function getQueueSetupVnc(GenericEvent $event) {
-		if (in_array($event['type'], [get_service_define('KVM_LINUX'), get_service_define('KVM_WINDOWS'), get_service_define('CLOUD_KVM_LINUX'), get_service_define('CLOUD_KVM_WINDOWS')])) {
+		if (in_array($event['type'], [get_service_define('VIRTUOZZO'), get_service_define('SSD_VIRTUOZZO')])) {
 			myadmin_log(self::$module, 'info', self::$name.' Queue Setup Vnc', __LINE__, __FILE__);
 			$serviceClass = $event->getSubject();
 			$smarty = new \TFSmarty();
@@ -405,7 +405,7 @@ class Plugin {
 	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
 	 */
 	public static function getQueueResetPassword(GenericEvent $event) {
-		if (in_array($event['type'], [get_service_define('KVM_LINUX'), get_service_define('KVM_WINDOWS'), get_service_define('CLOUD_KVM_LINUX'), get_service_define('CLOUD_KVM_WINDOWS')])) {
+		if (in_array($event['type'], [get_service_define('VIRTUOZZO'), get_service_define('SSD_VIRTUOZZO')])) {
 			myadmin_log(self::$module, 'info', self::$name.' Queue Reset Password', __LINE__, __FILE__);
 			$serviceClass = $event->getSubject();
 			$smarty = new \TFSmarty();

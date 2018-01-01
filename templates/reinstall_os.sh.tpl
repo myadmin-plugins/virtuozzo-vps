@@ -1,4 +1,4 @@
-								echo "export PATH=\"\$PATH:/usr/sbin:/sbin:/bin:/usr/bin:\";\n";
-								echo "prlctl stop {$vps['vps_vzid']};\n";
-								echo "prlctl delete {$vps['vps_vzid']};\n";
+export PATH="$PATH:/usr/sbin:/sbin:/bin:/usr/bin:";
+prlctl stop {$vps_vzid};
+prlctl delete {$vps_vzid};
 {vps_create}

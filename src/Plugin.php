@@ -46,7 +46,12 @@ class Plugin {
 			self::$module.'.queue_stop' => [__CLASS__, 'getQueueStop'],
 			self::$module.'.queue_restart' => [__CLASS__, 'getQueueRestart'],
 			self::$module.'.queue_setup_vnc' => [__CLASS__, 'getQueueSetupVnc'],
-			self::$module.'.queue_reset_password' => [__CLASS__, 'getQueueResetPassword'],
+			self::$module.'.queue_change_hostname' => [__CLASS__, 'getQueueChangeHostname'],
+			self::$module.'.queue_change_root' => [__CLASS__, 'getQueueChangeRoot'],
+			self::$module.'.queue_ensure_addon_ip' => [__CLASS__, 'getQueueEnsureAddonIp'],
+			self::$module.'.queue_change_ip' => [__CLASS__, 'getQueueChangeIp'],
+			self::$module.'.queue_add_ip' => [__CLASS__, 'getQueueAddIp'],
+			self::$module.'.queue_remove_ip' => [__CLASS__, 'getQueueRemoveIp'],
 		];
 	}
 
@@ -404,9 +409,9 @@ class Plugin {
 	/**
 	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
 	 */
-	public static function getQueueResetPassword(GenericEvent $event) {
+	public static function getQueueVz(GenericEvent $event) {
 		if (in_array($event['type'], [get_service_define('VIRTUOZZO'), get_service_define('SSD_VIRTUOZZO')])) {
-			myadmin_log(self::$module, 'info', self::$name.' Queue Reset Password', __LINE__, __FILE__);
+			myadmin_log(self::$module, 'info', self::$name.' Queue Vz', __LINE__, __FILE__);
 			$serviceClass = $event->getSubject();
 			$smarty = new \TFSmarty();
 			$smarty->assign([
@@ -416,10 +421,135 @@ class Plugin {
 				'domain' => DOMAIN,
 				'param1' => $event['param1']
 			]);
-			echo $smarty->fetch(__DIR__.'/../templates/reset_password.sh.tpl');
+			echo $smarty->fetch(__DIR__.'/../templates/vz.sh.tpl');
 			$event->stopPropagation();
 		}
 	}
 
+
+	/**
+	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
+	 */
+	public static function getQueueChangeHostname(GenericEvent $event) {
+		if (in_array($event['type'], [get_service_define('VIRTUOZZO'), get_service_define('SSD_VIRTUOZZO')])) {
+			myadmin_log(self::$module, 'info', self::$name.' Queue Change Hostname', __LINE__, __FILE__);
+			$serviceClass = $event->getSubject();
+			$smarty = new \TFSmarty();
+			$smarty->assign([
+				'vps_id' => $serviceClass->getId(),
+				'vps_vzid' => is_numeric($serviceClass->getVzid()) ? (in_array($event['type'], [get_service_define('KVM_WINDOWS'), get_service_define('CLOUD_KVM_WINDOWS')]) ? 'windows'.$serviceClass->getVzid() : 'linux'.$serviceClass->getVzid()) : $serviceClass->getVzid(),
+				'email' => $GLOBALS['tf']->accounts->cross_reference($serviceClass->getCustid()),
+				'domain' => DOMAIN,
+				'param1' => $event['param1']
+			]);
+			echo $smarty->fetch(__DIR__.'/../templates/change_hostname.sh.tpl');
+			$event->stopPropagation();
+		}
+	}
+
+
+	/**
+	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
+	 */
+	public static function getQueueChangeRoot(GenericEvent $event) {
+		if (in_array($event['type'], [get_service_define('VIRTUOZZO'), get_service_define('SSD_VIRTUOZZO')])) {
+			myadmin_log(self::$module, 'info', self::$name.' Queue Change Root', __LINE__, __FILE__);
+			$serviceClass = $event->getSubject();
+			$smarty = new \TFSmarty();
+			$smarty->assign([
+				'vps_id' => $serviceClass->getId(),
+				'vps_vzid' => is_numeric($serviceClass->getVzid()) ? (in_array($event['type'], [get_service_define('KVM_WINDOWS'), get_service_define('CLOUD_KVM_WINDOWS')]) ? 'windows'.$serviceClass->getVzid() : 'linux'.$serviceClass->getVzid()) : $serviceClass->getVzid(),
+				'email' => $GLOBALS['tf']->accounts->cross_reference($serviceClass->getCustid()),
+				'domain' => DOMAIN,
+				'param1' => $event['param1']
+			]);
+			echo $smarty->fetch(__DIR__.'/../templates/change_root.sh.tpl');
+			$event->stopPropagation();
+		}
+	}
+
+
+	/**
+	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
+	 */
+	public static function getQueueEnsureAddonIp(GenericEvent $event) {
+		if (in_array($event['type'], [get_service_define('VIRTUOZZO'), get_service_define('SSD_VIRTUOZZO')])) {
+			myadmin_log(self::$module, 'info', self::$name.' Queue Ensure Addon Ip', __LINE__, __FILE__);
+			$serviceClass = $event->getSubject();
+			$smarty = new \TFSmarty();
+			$smarty->assign([
+				'vps_id' => $serviceClass->getId(),
+				'vps_vzid' => is_numeric($serviceClass->getVzid()) ? (in_array($event['type'], [get_service_define('KVM_WINDOWS'), get_service_define('CLOUD_KVM_WINDOWS')]) ? 'windows'.$serviceClass->getVzid() : 'linux'.$serviceClass->getVzid()) : $serviceClass->getVzid(),
+				'email' => $GLOBALS['tf']->accounts->cross_reference($serviceClass->getCustid()),
+				'domain' => DOMAIN,
+				'param1' => $event['param1']
+			]);
+			echo $smarty->fetch(__DIR__.'/../templates/ensure_addon_ip.sh.tpl');
+			$event->stopPropagation();
+		}
+	}
+
+
+	/**
+	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
+	 */
+	public static function getQueueChangeIp(GenericEvent $event) {
+		if (in_array($event['type'], [get_service_define('VIRTUOZZO'), get_service_define('SSD_VIRTUOZZO')])) {
+			myadmin_log(self::$module, 'info', self::$name.' Queue Change Ip', __LINE__, __FILE__);
+			$serviceClass = $event->getSubject();
+			$smarty = new \TFSmarty();
+			$smarty->assign([
+				'vps_id' => $serviceClass->getId(),
+				'vps_vzid' => is_numeric($serviceClass->getVzid()) ? (in_array($event['type'], [get_service_define('KVM_WINDOWS'), get_service_define('CLOUD_KVM_WINDOWS')]) ? 'windows'.$serviceClass->getVzid() : 'linux'.$serviceClass->getVzid()) : $serviceClass->getVzid(),
+				'email' => $GLOBALS['tf']->accounts->cross_reference($serviceClass->getCustid()),
+				'domain' => DOMAIN,
+				'param1' => $event['param1']
+			]);
+			echo $smarty->fetch(__DIR__.'/../templates/change_ip.sh.tpl');
+			$event->stopPropagation();
+		}
+	}
+
+
+	/**
+	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
+	 */
+	public static function getQueueAddIp(GenericEvent $event) {
+		if (in_array($event['type'], [get_service_define('VIRTUOZZO'), get_service_define('SSD_VIRTUOZZO')])) {
+			myadmin_log(self::$module, 'info', self::$name.' Queue Add Ip', __LINE__, __FILE__);
+			$serviceClass = $event->getSubject();
+			$smarty = new \TFSmarty();
+			$smarty->assign([
+				'vps_id' => $serviceClass->getId(),
+				'vps_vzid' => is_numeric($serviceClass->getVzid()) ? (in_array($event['type'], [get_service_define('KVM_WINDOWS'), get_service_define('CLOUD_KVM_WINDOWS')]) ? 'windows'.$serviceClass->getVzid() : 'linux'.$serviceClass->getVzid()) : $serviceClass->getVzid(),
+				'email' => $GLOBALS['tf']->accounts->cross_reference($serviceClass->getCustid()),
+				'domain' => DOMAIN,
+				'param1' => $event['param1']
+			]);
+			echo $smarty->fetch(__DIR__.'/../templates/add_ip.sh.tpl');
+			$event->stopPropagation();
+		}
+	}
+
+
+	/**
+	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
+	 */
+	public static function getQueueRemoveIp(GenericEvent $event) {
+		if (in_array($event['type'], [get_service_define('VIRTUOZZO'), get_service_define('SSD_VIRTUOZZO')])) {
+			myadmin_log(self::$module, 'info', self::$name.' Queue Remove Ip', __LINE__, __FILE__);
+			$serviceClass = $event->getSubject();
+			$smarty = new \TFSmarty();
+			$smarty->assign([
+				'vps_id' => $serviceClass->getId(),
+				'vps_vzid' => is_numeric($serviceClass->getVzid()) ? (in_array($event['type'], [get_service_define('KVM_WINDOWS'), get_service_define('CLOUD_KVM_WINDOWS')]) ? 'windows'.$serviceClass->getVzid() : 'linux'.$serviceClass->getVzid()) : $serviceClass->getVzid(),
+				'email' => $GLOBALS['tf']->accounts->cross_reference($serviceClass->getCustid()),
+				'domain' => DOMAIN,
+				'param1' => $event['param1']
+			]);
+			echo $smarty->fetch(__DIR__.'/../templates/remove_ip.sh.tpl');
+			$event->stopPropagation();
+		}
+	}
 
 }

@@ -1,2 +1,2 @@
-								echo "export PATH=\"\$PATH:/usr/sbin:/sbin:/bin:/usr/bin:\";\n";
-								echo "prlctl set {$vps['vps_vzid']} --hostname " . escapeshellarg($vps[history_old_value]) . ";\n";
+export PATH="$PATH:/usr/sbin:/sbin:/bin:/usr/bin:";
+prlctl set {$vps_vzid} --hostname {$param1|escapeshellarg};

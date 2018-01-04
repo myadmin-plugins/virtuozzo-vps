@@ -61,37 +61,6 @@ class Plugin {
 	/**
 	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
 	 */
-	public static function getMenu(GenericEvent $event) {
-		$menu = $event->getSubject();
-		if ($GLOBALS['tf']->ima == 'admin') {
-			$menu->add_link(self::$module, 'choice=none.reusable_virtuozzo', 'images/icons/database_warning_48.png', 'ReUsable Virtuozzo Licenses');
-			$menu->add_link(self::$module, 'choice=none.virtuozzo_list', 'images/icons/database_warning_48.png', 'Virtuozzo Licenses Breakdown');
-			$menu->add_link(self::$module.'api', 'choice=none.virtuozzo_licenses_list', '/images/whm/createacct.gif', 'List all Virtuozzo Licenses');
-		}
-	}
-
-	/**
-	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
-	 */
-	public static function getRequirements(GenericEvent $event) {
-		$loader = $event->getSubject();
-		$loader->add_page_requirement('crud_virtuozzo_list', '/../vendor/detain/crud/src/crud/crud_virtuozzo_list.php');
-		$loader->add_page_requirement('crud_reusable_virtuozzo', '/../vendor/detain/crud/src/crud/crud_reusable_virtuozzo.php');
-		$loader->add_requirement('get_virtuozzo_licenses', '/../vendor/detain/myadmin-virtuozzo-vps/src/virtuozzo.inc.php');
-		$loader->add_requirement('get_virtuozzo_list', '/../vendor/detain/myadmin-virtuozzo-vps/src/virtuozzo.inc.php');
-		$loader->add_page_requirement('virtuozzo_licenses_list', '/../vendor/detain/myadmin-virtuozzo-vps/src/virtuozzo_licenses_list.php');
-		$loader->add_page_requirement('virtuozzo_list', '/../vendor/detain/myadmin-virtuozzo-vps/src/virtuozzo_list.php');
-		$loader->add_requirement('get_available_virtuozzo', '/../vendor/detain/myadmin-virtuozzo-vps/src/virtuozzo.inc.php');
-		$loader->add_requirement('activate_virtuozzo', '/../vendor/detain/myadmin-virtuozzo-vps/src/virtuozzo.inc.php');
-		$loader->add_requirement('get_reusable_virtuozzo', '/../vendor/detain/myadmin-virtuozzo-vps/src/virtuozzo.inc.php');
-		$loader->add_page_requirement('reusable_virtuozzo', '/../vendor/detain/myadmin-virtuozzo-vps/src/reusable_virtuozzo.php');
-		$loader->add_requirement('class.Virtuozzo', '/../vendor/detain/virtuozzo-vps/src/Virtuozzo.php');
-		$loader->add_page_requirement('vps_add_virtuozzo', '/vps/addons/vps_add_virtuozzo.php');
-	}
-
-	/**
-	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
-	 */
 	public static function getSettings(GenericEvent $event) {
 		$settings = $event->getSubject();
 		$settings->add_text_setting(self::$module, 'Slice Costs', 'vps_slice_virtuozzo_cost', 'Virtuozzo VPS Cost Per Slice:', 'OpenVZ VPS will cost this much for 1 slice.', $settings->get_setting('VPS_SLICE_VIRTUOZZO_COST'));

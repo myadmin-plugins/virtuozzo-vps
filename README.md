@@ -24,5 +24,5 @@ composer require detain/myadmin-virtuozzo-vps
 
 ## License
 
-The Virtuozzo Vps Class class is licensed under the LGPL-v2 license.
+The Virtuozzo Vps Class class is licensed under the LGPL-v2.1 license.
 

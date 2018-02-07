@@ -79,17 +79,17 @@ vmd5="$(md5sum /etc/vz/conf/{$vps_vzid}.conf | cut -d" " -f1)";
  --numproc {$numproc}:{$numproc_b} \
  --numtcpsock {$numtcpsock}:{$numtcpsock_b} \
  --numothersock {$numothersock}:{$numothersock_b} \
- --vmguarpages {$vmguarpages}:${limit} \
+ --vmguarpages {$vmguarpages}:{literal}${limit}{/literal} \
  --kmemsize {$kmemsize}:{$kmemsize_b} \
  --tcpsndbuf {$tcpsndbuf}:{$tcpsndbuf_b} \
  --tcprcvbuf {$tcprcvbuf}:{$tcprcvbuf_b} \
  --othersockbuf {$othersockbuf}:{$othersockbuf_b} \
  --dgramrcvbuf {$dgramrcvbuf}:{$dgramrcvbuf_b} \
- --oomguarpages {$oomguarpages}:${limit} \
+ --oomguarpages {$oomguarpages}:{literal}${limit}{/literal} \
  --privvmpages {$privvmpages}:{$privvmpages_b} \
  --numfile {$numfile}:{$numfile_b} \
  --numflock {$numflock}:{$numflock_b} \
- --physpages 0:${limit} \
+ --physpages 0:{literal}${limit}{/literal} \
  --dcachesize {$dcachesize}:{$dcachesize_b} \
  --numiptent {$numiptent}:{$numiptent_b} \
  --avnumproc {$avnumproc}:{$avnumproc_b} \
@@ -99,9 +99,9 @@ if [ -e /usr/sbin/vzcfgvalidate ]; then
   /usr/sbin/vzcfgvalidate -r /etc/vz/conf/{$vps_vzid}.conf >/dev/null 2>&1;
 fi;
 vmd52="$(md5sum /etc/vz/conf/{$vps_vzid}.conf | cut -d" " -f1)";
-echo "Original MD5      ${vmd5}";
-echo "New MD5           ${vmd52}";
-if [ ! "${vmd5}" = "${vmd52}" ]; then
+echo "Original MD5      {literal}${vmd5}{/literal}";
+echo "New MD5           {literal}${vmd52}{/literal}";
+if [ ! "{literal}${vmd5}{/literal}" = "{literal}${vmd52}{/literal}" ]; then
   echo "          Config File Changed, Restarting VPS";
 else
   echo "          No Config File Changes";

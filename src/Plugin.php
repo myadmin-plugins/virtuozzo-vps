@@ -10,8 +10,8 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  *
  * @package Detain\MyAdminVirtuozzo
  */
-class Plugin {
-
+class Plugin
+{
 	public static $name = 'Virtuozzo VPS';
 	public static $description = 'Allows selling of Virtuozzo VPS Types.  Virtuozzo is an operating system-level server virtualization solution designed to centralize server management and consolidate workloads, which reduces overhead by reducing the number of physical servers required. Organizations use Virtuozzo for server consolidation, disaster recovery, and server workload agility. Virtuozzo does not generate a virtual machine that resides on a host OS so that users can run multiple operating systems. Instead it creates isolated virtual private servers (VPSs) on a single physical server. For instance, the software can run multiple Linux VPSs, but not Linux and Windows at the same time on the same server. Each VPS performs exactly like a stand-alone server and can be rebooted independently.  More info at https://virtuozzo.com/';
 	public static $help = '';
@@ -21,13 +21,15 @@ class Plugin {
 	/**
 	 * Plugin constructor.
 	 */
-	public function __construct() {
+	public function __construct()
+	{
 	}
 
 	/**
 	 * @return array
 	 */
-	public static function getHooks() {
+	public static function getHooks()
+	{
 		return [
 			self::$module.'.settings' => [__CLASS__, 'getSettings'],
 			//self::$module.'.activate' => [__CLASS__, 'getActivate'],
@@ -39,7 +41,8 @@ class Plugin {
 	/**
 	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
 	 */
-	public static function getActivate(GenericEvent $event) {
+	public static function getActivate(GenericEvent $event)
+	{
 		$serviceClass = $event->getSubject();
 		if ($event['type'] == get_service_define('VIRTUOZZO')) {
 			myadmin_log(self::$module, 'info', 'Virtuozzo Activation', __LINE__, __FILE__);
@@ -50,7 +53,8 @@ class Plugin {
 	/**
 	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
 	 */
-	public static function getDeactivate(GenericEvent $event) {
+	public static function getDeactivate(GenericEvent $event)
+	{
 		if ($event['type'] == get_service_define('VIRTUOZZO')) {
 			myadmin_log(self::$module, 'info', self::$name.' Deactivation', __LINE__, __FILE__);
 			$serviceClass = $event->getSubject();
@@ -61,7 +65,8 @@ class Plugin {
 	/**
 	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
 	 */
-	public static function getSettings(GenericEvent $event) {
+	public static function getSettings(GenericEvent $event)
+	{
 		$settings = $event->getSubject();
 		$settings->add_text_setting(self::$module, 'Slice Costs', 'vps_slice_virtuozzo_cost', 'Virtuozzo VPS Cost Per Slice:', 'OpenVZ VPS will cost this much for 1 slice.', $settings->get_setting('VPS_SLICE_VIRTUOZZO_COST'));
 		$settings->add_text_setting(self::$module, 'Slice Costs', 'vps_slice_ssd_virtuozzo_cost', 'SSD Virtuozzo VPS Cost Per Slice:', 'SSD OpenVZ VPS will cost this much for 1 slice.', $settings->get_setting('VPS_SLICE_SSD_VIRTUOZZO_COST'));
@@ -74,7 +79,8 @@ class Plugin {
 	/**
 	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
 	 */
-	public static function getQueue(GenericEvent $event) {
+	public static function getQueue(GenericEvent $event)
+	{
 		if (in_array($event['type'], [get_service_define('VIRTUOZZO'), get_service_define('SSD_VIRTUOZZO')])) {
 			$vps = $event->getSubject();
 			myadmin_log(self::$module, 'info', self::$name.' Queue '.ucwords(str_replace('_', ' ', $vps['action'])).' for VPS '.$vps['vps_hostname'].'(#'.$vps['vps_id'].'/'.$vps['vps_vzid'].')', __LINE__, __FILE__);

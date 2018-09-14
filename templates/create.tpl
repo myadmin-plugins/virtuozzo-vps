@@ -13,31 +13,27 @@ function iprogress() {literal}{{/literal}
   curl --connect-timeout 60 --max-time 240 -k -d action=install_progress -d progress=$1 -d server={$vps_id} 'https://myvps2.interserver.net/vps_queue.php' < /dev/null > /dev/null 2>&1;
 {literal}}{/literal}
 iprogress 10 &
-prlctl create {$vps_vzid} --vmtype ct --ostemplate {$template};
-iprogress 20 &
-prlctl set {$vps_vzid} --swappages 1G --userpasswd root:{$rootpass};
-iprogress 30 &
-prlctl set {$vps_vzid} --hostname {$hostname};
-iprogress 40 &
-prlctl set {$vps_vzid} --cpus {$cpus};
-iprogress 50 &
-prlctl set {$vps_vzid} --device-add net --type routed --ipadd {$vps_ip} --nameserver 8.8.8.8;
+prlctl create {$vzid} --vmtype ct --ostemplate {$vps_os};
 iprogress 60 &
-prlctl set {$vps_vzid} --onboot yes --memsize {$ram}M;
+prlctl set {$vzid} --swappages 1G --userpasswd root:{$rootpass};
+prlctl set {$vzid} --hostname {$hostname};
+prlctl set {$vzid} --cpus {$cpus};
+prlctl set {$vzid} --device-add net --type routed --ipadd {$ip} --nameserver 8.8.8.8;
+prlctl set {$vzid} --onboot yes --memsize {$ram}M;
 iprogress 70 &
-prlctl set {$vps_vzid} --device-set hdd0 --size {$hd};
+prlctl set {$vzid} --device-set hdd0 --size {$hd};
 iprogress 80 &
 ports=" $(prlctl list -a -i |grep "Remote display:.*port=" |sed s#"^.*port=\([0-9]*\) .*$"#"\1"#g) ";
 start=5901;
-found=0; 
+found=0;
 while [ $found -eq 0 ]; do
   if [ "$(echo "$found" | grep " $start ")" = "" ]; then
-    found=$start;
+	found=$start;
   else
-    start=$(($start + 1));
+	start=$(($start + 1));
   fi;
 done;
-prlctl set {$vps_vzid} --vnc-mode manual --vnc-port $start --vnc-nopasswd --vnc-address 127.0.0.1;
+prlctl set {$vzid} --vnc-mode manual --vnc-port $start --vnc-nopasswd --vnc-address 127.0.0.1;
 iprogress 90 &
-prlctl start {$vps_vzid};
+prlctl start {$vzid};
 iprogress 100 &

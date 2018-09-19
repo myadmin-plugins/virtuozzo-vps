@@ -1,3 +1,5 @@
+{assign var=vzid value='vps'+$id}
+{assign var=vps_os value=$vps_os|replace:'.tar.gz':''}
 {assign var=ram value=$settings['slice_ram'] * $vps_slices}
 {assign var=hd value=(($settings['slice_hd'] * $vps_slices) + $settings['additional_hd']) * 1024}
 {if in_array($vps_custid, [2773, 8, 2304])}
@@ -9,9 +11,9 @@
 {assign var=cpulimit value=25 * $vps_slices}
 {assign var=cpus value=ceil($vps_slices / 4)}
 {/if}
-function iprogress() {literal}{{/literal}
+function iprogress() {
   curl --connect-timeout 60 --max-time 240 -k -d action=install_progress -d progress=$1 -d server={$vps_id} 'https://myvps2.interserver.net/vps_queue.php' < /dev/null > /dev/null 2>&1;
-{literal}}{/literal}
+}
 iprogress 10 &
 prlctl create {$vzid} --vmtype ct --ostemplate {$vps_os};
 iprogress 60 &

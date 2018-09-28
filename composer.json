@@ -1,5 +1,5 @@
 {
-	"name": "detain/myadmin-virtuozzo-vps",
+	"name": "detain/virtuozzo-vps",
 	"type": "myadmin-plugin",
 	"description": "Virtuozzo Vps Class",
 	"keywords": [

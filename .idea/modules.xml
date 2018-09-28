@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/myadmin-virtuozzo-vps.iml" filepath="$PROJECT_DIR$/.idea/myadmin-virtuozzo-vps.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/virtuozzo-vps.iml" filepath="$PROJECT_DIR$/.idea/virtuozzo-vps.iml" />
     </modules>
   </component>
 </project>

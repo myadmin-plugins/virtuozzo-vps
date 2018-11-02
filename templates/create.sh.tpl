@@ -29,7 +29,7 @@ ports=" $(prlctl list -a -i |grep "Remote display:.*port=" |sed s#"^.*port=\([0-
 start=5901;
 found=0;
 while [ $found -eq 0 ]; do
-  if [ "$(echo "$found" | grep " $start ")" = "" ]; then
+  if [ "$(echo "$found" | grep "$start")" = "" ]; then
 	found=$start;
   else
 	start=$(($start + 1));

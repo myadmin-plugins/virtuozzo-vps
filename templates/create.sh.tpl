@@ -1,4 +1,3 @@
-{assign var=vzid value='vps'+$id}
 {assign var=vps_os value=$vps_os|replace:'.tar.gz':''}
 {assign var=ram value=$settings['slice_ram'] * $vps_slices}
 {assign var=hd value=(($settings['slice_hd'] * $vps_slices) + $settings['additional_hd']) * 1024}

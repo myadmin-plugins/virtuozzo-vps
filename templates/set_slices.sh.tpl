@@ -8,7 +8,7 @@
 {assign var=cpuunits value=1500 * $vps_slices}
 {assign var=cpulimit value=25 * $vps_slices}
 {/if}
-prlctl set {$vzid} --cpus {$cpus};
-prlctl set {$vzid} --cpuunits {$cpuunits};
-prlctl set {$vzid} --cpulimit {$cpulimit};
-prlctl set {$vzid} --device-set hdd0 --size {$hd};
+prlctl set {$vps_vzid} --cpus {$cpus};
+prlctl set {$vps_vzid} --cpuunits {$cpuunits};
+prlctl set {$vps_vzid} --cpulimit {$cpulimit};
+prlctl set {$vps_vzid} --device-set hdd0 --size {$hd};

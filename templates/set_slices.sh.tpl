@@ -10,5 +10,4 @@
 {/if}
 prlctl set {$vps_vzid} --cpus {$cpus};
 prlctl set {$vps_vzid} --cpuunits {$cpuunits};
-prlctl set {$vps_vzid} --cpulimit {$cpulimit};
 prlctl set {$vps_vzid} --device-set hdd0 --size {$hd};

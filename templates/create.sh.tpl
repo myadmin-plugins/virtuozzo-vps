@@ -22,7 +22,6 @@ prlctl set {$vzid} --device-add net --type routed --ipadd {$ip} --nameserver 8.8
 iprogress 70 &
 prlctl set {$vzid} --cpus {$cpus};
 prlctl set {$vzid} --cpuunits {$cpuunits};
-prlctl set {$vzid} --cpulimit {$cpulimit};
 prlctl set {$vzid} --device-set hdd0 --size {$hd};
 iprogress 80 &
 prlctl set {$vzid} --onboot yes ;

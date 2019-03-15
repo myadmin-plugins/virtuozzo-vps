@@ -4,10 +4,8 @@
 {assign var=cpus value=$vps_slices}
 {if in_array($vps_custid, [2773, 8, 2304])}
 {assign var=cpuunits value=1500 * 1.5 * $vps_slices}
-{assign var=cpulimit value=100 * $vps_slices}
 {else}
 {assign var=cpuunits value=1500 * $vps_slices}
-{assign var=cpulimit value=25 * $vps_slices}
 {/if}
 function iprogress() {
   curl --connect-timeout 60 --max-time 240 -k -d action=install_progress -d progress=$1 -d server={$vps_id} 'https://myvps2.interserver.net/vps_queue.php' < /dev/null > /dev/null 2>&1;

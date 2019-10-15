@@ -14,10 +14,11 @@ if [ "{$vps_os}" = "centos-7-x86_64-breadbasket" ]; then
   vps_os=centos-7-x86_64
   webuzo=1
 else
+  vps_os="{$vps_os}"
   webuzo=0
 fi
 iprogress 10
-prlctl create {$vzid} --vmtype ct --ostemplate {$vps_os};
+prlctl create {$vzid} --vmtype ct --ostemplate "$vps_os";
 iprogress 60
 prlctl set {$vzid} --userpasswd root:{$rootpass};
 prlctl set {$vzid} --swappages 1G --memsize {$ram}M;
@@ -44,7 +45,7 @@ iprogress 90
 prlctl start {$vzid};
 iprogress 91
 if [ $webuzo -eq 1 ]; then
-  if [ "{$vps_os}" = "centos-7-x86_64" ]; then
+  if [ "$vps_os" = "centos-7-x86_64" ]; then
     prlctl exec {$vzid} 'yum -y remove httpd sendmail xinetd firewalld samba samba-libs samba-common-tools samba-client samba-common samba-client-libs samba-common-libs rpcbind; userdel apache'
     iprogress 92
     prlctl exec {$vzid} 'yum -y install nano net-tools'
@@ -54,10 +55,10 @@ if [ $webuzo -eq 1 ]; then
   iprogress 94
   prlctl exec {$vzid} 'wget -N http://files.webuzo.com/install.sh -O install.sh'
   iprogress 95
-  prlctl exec {$vzid} 'chmod +x install.sh;./install.sh;rm -f install.sh'
+  prlctl exec {$vzid} 'chmod +x install.sh;./install.sh;rm -f install.sh;chmod a+rx -R /usr/local/webuzo'
   iprogress 99
   echo "Sleeping for a minute to workaround an ish"
-  sleep 1m;
+  sleep 10s;
   echo "That was a pleasant nap.. back to the grind..."
 fi;
 iprogress 100

@@ -66,8 +66,8 @@ if [ $webuzo -eq 1 ]; then
   sleep 10s;
   echo "That was a pleasant nap.. back to the grind..."
 fi;
-if [ $cpanel eq 1 ]; then
-	prlctl exec {$vzid} 'yum -y install perl nano screen wget psmisc net-tools;
+if [ $cpanel -eq 1 ]; then
+	prlctl exec {$vzid} 'yum -y install perl nano screen wget psmisc net-tools;'
 	prlctl exec {$vzid} 'wget http://layer1.cpanel.net/latest;'
 	iprogress 92
 	prlctl exec {$vzid} 'bash latest'

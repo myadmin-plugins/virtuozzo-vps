@@ -71,18 +71,17 @@ if [ $cpanel -eq 1 ]; then
 	prlctl exec {$vzid} 'wget http://layer1.cpanel.net/latest;'
 	iprogress 92
 	prlctl exec {$vzid} 'bash latest'
-	iprogress 95
+	iprogress 94
 	prlctl exec {$vzid} 'yum -y remove ea-apache24-mod_ruid2'
 	prlctl exec {$vzid} 'killall httpd; if [ -e /bin/systemctl ]; then systemctl stop httpd.service; else service httpd stop; fi'
-	iprogress 96
+	iprogress 95
 	prlctl exec {$vzid} 'yum -y install ea-apache24-mod_headers ea-apache24-mod_lsapi ea-liblsapi ea-apache24-mod_env ea-apache24-mod_deflate ea-apache24-mod_expires ea-apache24-mod_suexec'
 	iprogress 97
 	prlctl exec {$vzid} 'yum -y install ea-php72-php-litespeed ea-php72-php-opcache ea-php72-php-mysqlnd ea-php72-php-mcrypt ea-php72-php-gd ea-php72-php-mbstring'
-	iprogress 98
+	iprogress 99
 	prlctl exec {$vzid} '/usr/local/cpanel/bin/rebuild_phpconf  --default=ea-php72 --ea-php72=lsapi'
 	prlctl exec {$vzid} '/usr/sbin/whmapi1 php_ini_set_directives directive-1=post_max_size%3A32M directive-2=upload_max_filesize%3A128M directive-3=memory_limit%3A256M version=ea-php72'
-	prlctl exec {$vzid} '/scripts/restartsrv_httpd'
-	iprogress 99
 	prlctl exec {$vzid} 'cd /opt/cpanel; for i in $(find * -name "ea-php*"); do /usr/local/cpanel/bin/rebuild_phpconf --default=ea-php72 --$i=lsapi; done' 
+	prlctl exec {$vzid} '/scripts/restartsrv_httpd'
 fi;
 iprogress 100

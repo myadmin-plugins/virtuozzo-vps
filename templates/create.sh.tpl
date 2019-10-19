@@ -10,12 +10,17 @@
 function iprogress() {
   curl --connect-timeout 60 --max-time 240 -k -d action=install_progress -d progress=$1 -d server={$vps_id} 'https://myvps2.interserver.net/vps_queue.php' < /dev/null > /dev/null 2>&1;
 }
-if [ "{$vps_os}" = "centos-7-x86_64-breadbasket" ]; then
+IFS="
+"
+webuzo=0
+cpanel=0
+vps_ios="{$vps_os}"
+if [ "$vps_os" = "centos-7-x86_64-breadbasket" ]; then
   vps_os=centos-7-x86_64
   webuzo=1
-else
-  vps_os="{$vps_os}"
-  webuzo=0
+elif [ "$vps_os" = "centos-7-x86_64-cpanel" ]; then
+  vps_os=centos-7-x86_64
+  cpanel=1
 fi
 iprogress 10
 prlctl create {$vzid} --vmtype ct --ostemplate "$vps_os";
@@ -46,10 +51,10 @@ prlctl start {$vzid};
 iprogress 91
 if [ $webuzo -eq 1 ]; then
   if [ "$vps_os" = "centos-7-x86_64" ]; then
-    prlctl exec {$vzid} 'yum -y remove httpd sendmail xinetd firewalld samba samba-libs samba-common-tools samba-client samba-common samba-client-libs samba-common-libs rpcbind; userdel apache'
-    iprogress 92
-    prlctl exec {$vzid} 'yum -y install nano net-tools'
-    iprogress 93
+	prlctl exec {$vzid} 'yum -y remove httpd sendmail xinetd firewalld samba samba-libs samba-common-tools samba-client samba-common samba-client-libs samba-common-libs rpcbind; userdel apache'
+	iprogress 92
+	prlctl exec {$vzid} 'yum -y install nano net-tools'
+	iprogress 93
   fi
   prlctl exec {$vzid} 'rsync -a rsync://rsync.is.cc/admin /admin;/admin/yumcron;echo "/usr/local/emps/bin/php /usr/local/webuzo/cron.php" > /etc/cron.daily/wu.sh && chmod +x /etc/cron.daily/wu.sh'
   iprogress 94
@@ -60,5 +65,24 @@ if [ $webuzo -eq 1 ]; then
   echo "Sleeping for a minute to workaround an ish"
   sleep 10s;
   echo "That was a pleasant nap.. back to the grind..."
+fi;
+if [ $cpanel eq 1 ]; then
+	prlctl exec {$vzid} 'yum -y install perl nano screen wget psmisc net-tools;
+	prlctl exec {$vzid} 'wget http://layer1.cpanel.net/latest;'
+	iprogress 92
+	prlctl exec {$vzid} 'bash latest'
+	iprogress 95
+	prlctl exec {$vzid} 'yum -y remove ea-apache24-mod_ruid2'
+	prlctl exec {$vzid} 'killall httpd; if [ -e /bin/systemctl ]; then systemctl stop httpd.service; else service httpd stop; fi'
+	iprogress 96
+	prlctl exec {$vzid} 'yum -y install ea-apache24-mod_headers ea-apache24-mod_lsapi ea-liblsapi ea-apache24-mod_env ea-apache24-mod_deflate ea-apache24-mod_expires ea-apache24-mod_suexec'
+	iprogress 97
+	prlctl exec {$vzid} 'yum -y install ea-php72-php-litespeed ea-php72-php-opcache ea-php72-php-mysqlnd ea-php72-php-mcrypt ea-php72-php-gd ea-php72-php-mbstring'
+	iprogress 98
+	prlctl exec {$vzid} '/usr/local/cpanel/bin/rebuild_phpconf  --default=ea-php72 --ea-php72=lsapi'
+	prlctl exec {$vzid} '/usr/sbin/whmapi1 php_ini_set_directives directive-1=post_max_size%3A32M directive-2=upload_max_filesize%3A128M directive-3=memory_limit%3A256M version=ea-php72'
+	prlctl exec {$vzid} '/scripts/restartsrv_httpd'
+	iprogress 99
+	prlctl exec {$vzid} 'cd /opt/cpanel; for i in $(find * -name "ea-php*"); do /usr/local/cpanel/bin/rebuild_phpconf --default=ea-php72 --$i=lsapi; done' 
 fi;
 iprogress 100

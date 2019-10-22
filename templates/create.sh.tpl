@@ -14,7 +14,7 @@ IFS="
 "
 webuzo=0
 cpanel=0
-vps_ios="{$vps_os}"
+vps_os="{$vps_os}"
 if [ "$vps_os" = "centos-7-x86_64-breadbasket" ]; then
   vps_os=centos-7-x86_64
   webuzo=1

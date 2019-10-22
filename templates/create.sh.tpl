@@ -84,7 +84,7 @@ if [ $cpanel -eq 1 ]; then
 	iprogress 99
 	prlctl exec {$vzid} '/usr/local/cpanel/bin/rebuild_phpconf  --default=ea-php72 --ea-php72=lsapi'
 	prlctl exec {$vzid} '/usr/sbin/whmapi1 php_ini_set_directives directive-1=post_max_size%3A32M directive-2=upload_max_filesize%3A128M directive-3=memory_limit%3A256M version=ea-php72'
-	prlctl exec {$vzid} 'cd /opt/cpanel; for i in $(find * -name "ea-php*"); do /usr/local/cpanel/bin/rebuild_phpconf --default=ea-php72 --$i=lsapi; done' 
+	prlctl exec {$vzid} 'cd /opt/cpanel; for i in $(find * -maxdepth 0 -name "ea-php*"); do /usr/local/cpanel/bin/rebuild_phpconf --default=ea-php72 --$i=lsapi; done' 
 	prlctl exec {$vzid} '/scripts/restartsrv_httpd'
 fi;
 iprogress 100

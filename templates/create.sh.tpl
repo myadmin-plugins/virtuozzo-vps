@@ -58,19 +58,22 @@ if [ $webuzo -eq 1 ]; then
   fi
   prlctl exec {$vzid} 'rsync -a rsync://rsync.is.cc/admin /admin;/admin/yumcron;echo "/usr/local/emps/bin/php /usr/local/webuzo/cron.php" > /etc/cron.daily/wu.sh && chmod +x /etc/cron.daily/wu.sh'
   iprogress 94
-  prlctl exec {$vzid} 'wget -N http://files.webuzo.com/install.sh -O install.sh'
+  prlctl exec {$vzid} 'wget -N http://files.webuzo.com/install.sh -O /install.sh'
   iprogress 95
-  prlctl exec {$vzid} 'chmod +x install.sh;./install.sh;rm -f install.sh;chmod a+rx -R /usr/local/webuzo'
+  prlctl exec {$vzid} 'chmod +x /install.sh;bash -l /install.sh;rm -f /install.sh'
   iprogress 99
   echo "Sleeping for a minute to workaround an ish"
   sleep 10s;
   echo "That was a pleasant nap.. back to the grind..."
 fi;
 if [ $cpanel -eq 1 ]; then
+  echo "Sleeping for a minute to workaround an ish"
+  sleep 10s;
+  echo "That was a pleasant nap.. back to the grind..."
 	prlctl exec {$vzid} 'yum -y install perl nano screen wget psmisc net-tools;'
 	prlctl exec {$vzid} 'wget http://layer1.cpanel.net/latest;'
 	iprogress 92
-	prlctl exec {$vzid} 'bash latest'
+	prlctl exec {$vzid} 'bash -l latest'
 	iprogress 94
 	prlctl exec {$vzid} 'yum -y remove ea-apache24-mod_ruid2'
 	prlctl exec {$vzid} 'killall httpd; if [ -e /bin/systemctl ]; then systemctl stop httpd.service; else service httpd stop; fi'

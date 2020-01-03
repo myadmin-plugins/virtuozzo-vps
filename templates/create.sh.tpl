@@ -73,6 +73,7 @@ if [ $cpanel -eq 1 ]; then
 	prlctl exec {$vzid} 'yum -y install perl nano screen wget psmisc net-tools;'
 	prlctl exec {$vzid} 'wget http://layer1.cpanel.net/latest;'
 	iprogress 92
+	prlctl exec {$vzid} 'systemctl disable firewalld.service; systemctl mask firewalld.service; rpm -e firewalld xinetd httpd'
 	prlctl exec {$vzid} 'bash -l latest'
 	iprogress 94
 	prlctl exec {$vzid} 'yum -y remove ea-apache24-mod_ruid2'

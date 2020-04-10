@@ -1,6 +1,7 @@
 {assign var=vps_os value=$vps_os|replace:'.tar.gz':''}
 {assign var=ram value=$settings['slice_ram'] * $vps_slices}
 {assign var=hd value=(($settings['slice_hd'] * $vps_slices) + $settings['additional_hd']) * 1024}
+{assign var=hdd value=(($settings['slice_hd'] * $vps_slices) + $settings['additional_hd'])}
 {assign var=cpus value=$vps_slices}
 {if in_array($vps_custid, [2773, 8, 2304])}
 {assign var=cpuunits value=1500 * 1.5 * $vps_slices}
@@ -33,6 +34,7 @@ iprogress 70
 prlctl set {$vzid} --cpus {$cpus};
 prlctl set {$vzid} --cpuunits {$cpuunits};
 prlctl set {$vzid} --device-set hdd0 --size {$hd};
+vzctl set {$vzid}  --diskspace {$hdd}G --save
 iprogress 80
 prlctl set {$vzid} --onboot yes ;
 ports=" $(prlctl list -a -i |grep "Remote display:.*port=" |sed s#"^.*port=\([0-9]*\) .*$"#"\1"#g) ";

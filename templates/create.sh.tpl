@@ -91,4 +91,5 @@ if [ $cpanel -eq 1 ]; then
 	prlctl exec {$vzid} '/scripts/restartsrv_httpd'
 	prlctl exec {$vzid} 'rsync -a rsync://rsync.is.cc/admin /admin && cd /etc/cron.daily && ln -s /admin/wp/webuzo_wp_cli_auto.sh /etc/cron.daily/webuzo_wp_cli_auto.sh'
 fi;
+/admin/vzenable blocksmtp {$vzid}
 iprogress 100

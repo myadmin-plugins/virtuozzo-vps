@@ -74,12 +74,12 @@ class Plugin
 		$settings->add_text_setting(self::$module, _('Slice Costs'), 'vps_slice_virtuozzo_cost', _('Virtuozzo VPS Cost Per Slice'), _('OpenVZ VPS will cost this much for 1 slice.'), $settings->get_setting('VPS_SLICE_VIRTUOZZO_COST'));
 		$settings->add_text_setting(self::$module, _('Slice Costs'), 'vps_slice_ssd_virtuozzo_cost', _('SSD Virtuozzo VPS Cost Per Slice'), _('SSD OpenVZ VPS will cost this much for 1 slice.'), $settings->get_setting('VPS_SLICE_SSD_VIRTUOZZO_COST'));
 		$settings->setTarget('module');
-        $settings->add_select_master(_(self::$module), _('Default Servers'), self::$module, 'new_vps_virtuozzo_server', _('Virtuozzo NJ Server'), NEW_VPS_VIRTUOZZO_SERVER, 12, 1);
-        $settings->add_select_master(_(self::$module), _('Default Servers'), self::$module, 'new_vps_virtuozzo_la_server', _('Virtuozzo LA Server'), NEW_VPS_VIRTUOZZO_LA_SERVER, 12, 2);
+		$settings->add_select_master(_(self::$module), _('Default Servers'), self::$module, 'new_vps_virtuozzo_server', _('Virtuozzo NJ Server'), NEW_VPS_VIRTUOZZO_SERVER, 12, 1);
+		$settings->add_select_master(_(self::$module), _('Default Servers'), self::$module, 'new_vps_virtuozzo_la_server', _('Virtuozzo LA Server'), NEW_VPS_VIRTUOZZO_LA_SERVER, 12, 2);
 		$settings->add_select_master(_(self::$module), _('Default Servers'), self::$module, 'new_vps_ssd_virtuozzo_server', _('SSD Virtuozzo NJ Server'), NEW_VPS_SSD_VIRTUOZZO_SERVER, 13, 1);
-        $settings->add_dropdown_setting(self::$module, _('Out of Stock'), 'outofstock_virtuozzo', _('Out Of Stock Virtuozzo Secaucus'), _('Enable/Disable Sales Of This Type'), $settings->get_setting('OUTOFSTOCK_VIRTUOZZO'), ['0', '1'], ['No', 'Yes']);
-        $settings->add_dropdown_setting(self::$module, _('Out of Stock'), 'outofstock_virtuozzo_la', _('Out Of Stock Virtuozzo Los Angeles'), _('Enable/Disable Sales Of This Type'), $settings->get_setting('OUTOFSTOCK_VIRTUOZZO_LA'), ['0', '1'], ['No', 'Yes']);
-        $settings->add_dropdown_setting(self::$module, _('Out of Stock'), 'outofstock_virtuozzo_ny', _('Out Of Stock Virtuozzo New York'), _('Enable/Disable Sales Of This Type'), $settings->get_setting('OUTOFSTOCK_VIRTUOZZO_NY'), ['0', '1'], ['No', 'Yes']);
+		$settings->add_dropdown_setting(self::$module, _('Out of Stock'), 'outofstock_virtuozzo', _('Out Of Stock Virtuozzo Secaucus'), _('Enable/Disable Sales Of This Type'), $settings->get_setting('OUTOFSTOCK_VIRTUOZZO'), ['0', '1'], ['No', 'Yes']);
+		$settings->add_dropdown_setting(self::$module, _('Out of Stock'), 'outofstock_virtuozzo_la', _('Out Of Stock Virtuozzo Los Angeles'), _('Enable/Disable Sales Of This Type'), $settings->get_setting('OUTOFSTOCK_VIRTUOZZO_LA'), ['0', '1'], ['No', 'Yes']);
+		$settings->add_dropdown_setting(self::$module, _('Out of Stock'), 'outofstock_virtuozzo_ny', _('Out Of Stock Virtuozzo New York'), _('Enable/Disable Sales Of This Type'), $settings->get_setting('OUTOFSTOCK_VIRTUOZZO_NY'), ['0', '1'], ['No', 'Yes']);
 		$settings->add_dropdown_setting(self::$module, _('Out of Stock'), 'outofstock_ssd_virtuozzo', _('Out Of Stock SSD Virtuozzo Secaucus'), _('Enable/Disable Sales Of This Type'), $settings->get_setting('OUTOFSTOCK_SSD_VIRTUOZZO'), ['0', '1'], ['No', 'Yes']);
 		$settings->setTarget('global');
 	}
@@ -98,7 +98,9 @@ class Plugin
 			} else {
 				$smarty = new \TFSmarty();
 				$smarty->assign($serviceInfo);
-				$event['output'] = $event['output'] . $smarty->fetch(__DIR__.'/../templates/'.$serviceInfo['action'].'.sh.tpl');
+				$output = $smarty->fetch(__DIR__.'/../templates/'.$serviceInfo['action'].'.sh.tpl');
+				myadmin_log('myadmin', 'info', var_export($output, true), __LINE__, __FILE__);
+				$event['output'] = $event['output'] . $output;
 			}
 			$event->stopPropagation();
 		}

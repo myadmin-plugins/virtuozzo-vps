@@ -1,0 +1,1 @@
+/root/cpaneldirect/cli/provirted.phar install-cpanel {$vps_vzid} {$email|escapeshellarg};

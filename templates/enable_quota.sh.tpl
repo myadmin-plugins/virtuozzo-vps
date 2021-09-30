@@ -1,1 +1,2 @@
-/root/cpaneldirect/cli/provirted.phar update --quota=on {$vps_vzid};
+export PATH="$PATH:/usr/sbin:/sbin:/bin:/usr/bin:";
+prlctl set {$vps_vzid} --quotaugidlimit 200 --save --setmode restart;

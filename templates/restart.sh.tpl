@@ -1,1 +1,2 @@
-/root/cpaneldirect/cli/provirted.phar restart {$vps_vzid|escapeshellarg};
+export PATH="$PATH:/usr/sbin:/sbin:/bin:/usr/bin:";
+prlctl restart {$vps_vzid};

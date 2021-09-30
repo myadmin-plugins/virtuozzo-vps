@@ -1,1 +1,2 @@
-/root/cpaneldirect/cli/provirted.phar stop {$vps_vzid|escapeshellarg};
+export PATH="$PATH:/usr/sbin:/sbin:/bin:/usr/bin:";
+prlctl stop {$vps_vzid};

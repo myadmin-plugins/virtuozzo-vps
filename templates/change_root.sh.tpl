@@ -1,2 +1,1 @@
-export PATH="$PATH:/usr/sbin:/sbin:/bin:/usr/bin:";
-prlctl set {$vps_vzid} --userpasswd root:{$param|escapeshellarg};
+/root/cpaneldirect/cli/provirted.phar update --password={$param|escapeshellarg} {$vps_vzid};

@@ -91,7 +91,6 @@ class Plugin
 	{
 		if (in_array($event['type'], [get_service_define('VIRTUOZZO'), get_service_define('SSD_VIRTUOZZO')])) {
 			$serviceInfo = $event->getSubject();
-			myadmin_log(self::$module, 'info', self::$name.' Queue '.ucwords(str_replace('_', ' ', $serviceInfo['action'])).' for VPS '.$serviceInfo['vps_hostname'].'(#'.$serviceInfo['vps_id'].'/'.$serviceInfo['vps_vzid'].')', __LINE__, __FILE__, self::$module, $serviceInfo['vps_id']);
 			$server_info = $serviceInfo['server_info'];
 			if (!file_exists(__DIR__.'/../templates/'.$serviceInfo['action'].'.sh.tpl')) {
 				myadmin_log(self::$module, 'error', 'Call '.$serviceInfo['action'].' for VPS '.$serviceInfo['vps_hostname'].'(#'.$serviceInfo['vps_id'].'/'.$serviceInfo['vps_vzid'].') Does not Exist for '.self::$name, __LINE__, __FILE__, self::$module, $serviceInfo['vps_id']);
@@ -99,7 +98,7 @@ class Plugin
 				$smarty = new \TFSmarty();
 				$smarty->assign($serviceInfo);
 				$output = $smarty->fetch(__DIR__.'/../templates/'.$serviceInfo['action'].'.sh.tpl');
-				myadmin_log('myadmin', 'info', var_export($output, true), __LINE__, __FILE__);
+				myadmin_log(self::$module, 'info', self::$name.' Queue '.ucwords(str_replace('_', ' ', $serviceInfo['action'])).' for '.strtoupper($settings['PREFIX']).' '.$serviceInfo['vps_hostname'].'(#'.$serviceInfo['vps_id'].'/'.$serviceInfo['vps_vzid'].'): '.$output, __LINE__, __FILE__, self::$module, $serviceInfo['vps_id']);
 				$event['output'] = $event['output'] . $output;
 			}
 			$event->stopPropagation();

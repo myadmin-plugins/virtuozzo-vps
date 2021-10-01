@@ -45,7 +45,7 @@ class Plugin
 	{
 		$serviceClass = $event->getSubject();
 		if (in_array($event['type'], [get_service_define('VIRTUOZZO'), get_service_define('SSD_VIRTUOZZO')])) {
-			myadmin_log(self::$module, 'info', 'Virtuozzo Activation', __LINE__, __FILE__, self::$module, $serviceClass->getId());
+			myadmin_log(self::$module, 'info', 'Virtuozzo Activation', __LINE__, __FILE__, self::$module, $serviceClass->getId(), true, false, $serviceClass->getCustid());
 			$event->stopPropagation();
 		}
 	}
@@ -57,7 +57,7 @@ class Plugin
 	{
 		if (in_array($event['type'], [get_service_define('VIRTUOZZO'), get_service_define('SSD_VIRTUOZZO')])) {
 			$serviceClass = $event->getSubject();
-			myadmin_log(self::$module, 'info', self::$name.' Deactivation', __LINE__, __FILE__, self::$module, $serviceClass->getId());
+			myadmin_log(self::$module, 'info', self::$name.' Deactivation', __LINE__, __FILE__, self::$module, $serviceClass->getId(), true, false, $serviceClass->getCustid());
 			$GLOBALS['tf']->history->add(self::$module.'queue', $serviceClass->getId(), 'delete', '', $serviceClass->getCustid());
 		}
 	}
@@ -94,12 +94,12 @@ class Plugin
 			$settings = get_module_settings(self::$module);
 			$server_info = $serviceInfo['server_info'];
 			if (!file_exists(__DIR__.'/../templates/'.$serviceInfo['action'].'.sh.tpl')) {
-				myadmin_log(self::$module, 'error', 'Call '.$serviceInfo['action'].' for VPS '.$serviceInfo['vps_hostname'].'(#'.$serviceInfo['vps_id'].'/'.$serviceInfo['vps_vzid'].') Does not Exist for '.self::$name, __LINE__, __FILE__, self::$module, $serviceInfo['vps_id']);
+				myadmin_log(self::$module, 'error', 'Call '.$serviceInfo['action'].' for VPS '.$serviceInfo['vps_hostname'].'(#'.$serviceInfo['vps_id'].'/'.$serviceInfo['vps_vzid'].') Does not Exist for '.self::$name, __LINE__, __FILE__, self::$module, $serviceInfo['vps_id'], true, false, $serviceInfo['vps_custid']);
 			} else {
 				$smarty = new \TFSmarty();
 				$smarty->assign($serviceInfo);
 				$output = $smarty->fetch(__DIR__.'/../templates/'.$serviceInfo['action'].'.sh.tpl');
-				myadmin_log(self	::$module, 'info', 'Queue '.$server_info[$settings['PREFIX'].'_name'].' '.$output, __LINE__, __FILE__, self::$module, $serviceInfo['vps_id']);
+				myadmin_log(self	::$module, 'info', 'Queue '.$server_info[$settings['PREFIX'].'_name'].' '.$output, __LINE__, __FILE__, self::$module, $serviceInfo['vps_id'], true, false, $serviceInfo['vps_custid']);
 				$event['output'] = $event['output'] . $output;
 			}
 			$event->stopPropagation();

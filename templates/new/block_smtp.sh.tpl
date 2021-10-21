@@ -1,1 +1,0 @@
-/root/cpaneldirect/cli/provirted.phar block-smtp {$vps_vzid|escapeshellarg} {$vps_id};

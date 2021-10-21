@@ -1,1 +1,1 @@
-/root/cpaneldirect/cli/provirted.phar restart {$vps_vzid|escapeshellarg};
+/root/cpaneldirect/cli/provirted.phar restart --virt=virtuozzo {$vps_vzid|escapeshellarg};

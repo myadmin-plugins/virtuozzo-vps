@@ -1,1 +1,1 @@
-/root/cpaneldirect/cli/provirted.phar add-ip {$vps_vzid|escapeshellarg} {$param|escapeshellarg};
+/root/cpaneldirect/cli/provirted.phar add-ip --virt=virtuozzo {$vps_vzid|escapeshellarg} {$param|escapeshellarg};

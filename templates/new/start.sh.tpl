@@ -1,1 +1,0 @@
-/root/cpaneldirect/cli/provirted.phar start {$vps_vzid|escapeshellarg};

@@ -1,1 +1,1 @@
-/root/cpaneldirect/cli/provirted.phar update --quota=off {$vps_vzid};
+/root/cpaneldirect/cli/provirted.phar update --virt=virtuozzo --quota=off {$vps_vzid};

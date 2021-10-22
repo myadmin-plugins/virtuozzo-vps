@@ -1,1 +1,1 @@
-/root/cpaneldirect/cli/provirted.phar install-cpanel --virt=virtuozzo {$vps_vzid} {$email|escapeshellarg};
+/root/cpaneldirect/cli/provirted.phar install-cpanel {$vps_vzid} {$email|escapeshellarg};

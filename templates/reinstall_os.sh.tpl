@@ -1,1 +1,1 @@
-/root/cpaneldirect/cli/provirted.phar destroy --virt=virtuozzo {$vps_vzid|escapeshellarg};
+/root/cpaneldirect/cli/provirted.phar destroy {$vps_vzid|escapeshellarg};

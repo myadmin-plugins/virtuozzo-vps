@@ -1,1 +1,1 @@
-/root/cpaneldirect/cli/provirted.phar update --virt=virtuozzo --password={$param|escapeshellarg} {$vps_vzid};
+/root/cpaneldirect/cli/provirted.phar update --password={$param|escapeshellarg} {$vps_vzid};

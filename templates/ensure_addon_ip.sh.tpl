@@ -1,1 +1,1 @@
-/root/cpaneldirect/cli/provirted.phar add-ip {$vps_vzid|escapeshellarg} {$param|escapeshellarg};
+/root/cpaneldirect/provirted.phar add-ip {$vps_vzid|escapeshellarg} {$param|escapeshellarg};

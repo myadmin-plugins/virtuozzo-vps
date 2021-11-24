@@ -1,1 +1,1 @@
-/root/cpaneldirect/cli/provirted.phar enable {$vps_vzid|escapeshellarg};
+/root/cpaneldirect/provirted.phar enable {$vps_vzid|escapeshellarg};

@@ -1,1 +1,1 @@
-/root/cpaneldirect/cli/provirted.phar update --password={$param|escapeshellarg} {$vps_vzid};
+/root/cpaneldirect/provirted.phar update --password={$param|escapeshellarg} {$vps_vzid};

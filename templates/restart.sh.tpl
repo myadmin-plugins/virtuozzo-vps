@@ -1,1 +1,1 @@
-/root/cpaneldirect/cli/provirted.phar restart {$vps_vzid|escapeshellarg};
+/root/cpaneldirect/provirted.phar restart {$vps_vzid|escapeshellarg};

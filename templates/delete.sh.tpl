@@ -1,1 +1,1 @@
-/root/cpaneldirect/cli/provirted.phar delete {$vps_vzid|escapeshellarg};
+/root/cpaneldirect/provirted.phar delete {$vps_vzid|escapeshellarg};

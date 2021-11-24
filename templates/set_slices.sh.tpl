@@ -1,1 +1,1 @@
-/root/cpaneldirect/cli/provirted.phar update --hd={($settings.slice_hd * $vps_slices) + $settings.additional_hd} --ram={$vps_slices * $settings.slice_ram} --cpu={$vps_slices} --cgroups={$vps_slices} {$vps_vzid};
+/root/cpaneldirect/provirted.phar update --hd={($settings.slice_hd * $vps_slices) + $settings.additional_hd} --ram={$vps_slices * $settings.slice_ram} --cpu={$vps_slices} --cgroups={$vps_slices} {$vps_vzid};

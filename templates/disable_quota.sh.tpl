@@ -1,1 +1,1 @@
-/root/cpaneldirect/cli/provirted.phar update --quota=off {$vps_vzid};
+/root/cpaneldirect/provirted.phar update --quota=off {$vps_vzid};

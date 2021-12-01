@@ -1,1 +1,1 @@
-{assign var='param' value=','|explode:$param}/root/cpaneldirect/provirted.phar change-ip {$vps_vzid|escapeshellarg} {$param[0]|escapeshellarg} {$param[1]|escapeshellarg};
+{assign var='param' value=','|explode:$param}/root/cpaneldirect/provirted.phar change-ip {if $vps_vzid == "0"}{$vps_id}{else}{$vps_vzid|escapeshellarg}{/if} {$param[0]|escapeshellarg} {$param[1]|escapeshellarg};

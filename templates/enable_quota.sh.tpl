@@ -1,1 +1,1 @@
-/root/cpaneldirect/provirted.phar update --quota=on {$vps_vzid};
+/root/cpaneldirect/provirted.phar update --quota=on {if $vps_vzid == "0"}{$vps_id}{else}{$vps_vzid|escapeshellarg}{/if};

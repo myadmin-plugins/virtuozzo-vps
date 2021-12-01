@@ -1,1 +1,1 @@
-/root/cpaneldirect/provirted.phar update --hd={($settings.slice_hd * $vps_slices) + $settings.additional_hd} {$vps_vzid};
+/root/cpaneldirect/provirted.phar update --hd={($settings.slice_hd * $vps_slices) + $settings.additional_hd} {if $vps_vzid == "0"}{$vps_id}{else}{$vps_vzid|escapeshellarg}{/if};

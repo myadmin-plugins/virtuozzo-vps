@@ -1,1 +1,1 @@
-/root/cpaneldirect/provirted.phar block-smtp {$vps_vzid|escapeshellarg} {$vps_id};
+/root/cpaneldirect/provirted.phar block-smtp {if $vps_vzid == "0"}{$vps_id}{else}{$vps_vzid|escapeshellarg}{/if} {$vps_id};

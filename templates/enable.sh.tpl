@@ -1,1 +1,1 @@
-/root/cpaneldirect/provirted.phar enable {$vps_vzid|escapeshellarg};
+/root/cpaneldirect/provirted.phar enable {if $vps_vzid == "0"}{$vps_id}{else}{$vps_vzid|escapeshellarg}{/if};

@@ -1,1 +1,1 @@
-/root/cpaneldirect/provirted.phar restore {$param1|escapeshellarg} {$param2|escapeshellarg} {$vps_vzid|escapeshellarg} {$vps_id};
+/root/cpaneldirect/provirted.phar restore {$param1|escapeshellarg} {$param2|escapeshellarg} {if $vps_vzid == "0"}{$vps_id}{else}{$vps_vzid|escapeshellarg}{/if} {$vps_id};

@@ -9,7 +9,7 @@
 {assign var=cpuunits value=1500 * $vps_slices}
 {/if}
 function iprogress() {
-  curl --connect-timeout 60 --max-time 240 -k -d action=install_progress -d progress=$1 -d server={$vps_id} 'https://myvps2.interserver.net/vps_queue.php' < /dev/null > /dev/null 2>&1;
+  curl --connect-timeout 60 --max-time 240 -k -d action=install_progress -d progress=$1 -d server={$vps_id} 'https://mynew.interserver.net/vps_queue.php' < /dev/null > /dev/null 2>&1;
 }
 IFS="
 "

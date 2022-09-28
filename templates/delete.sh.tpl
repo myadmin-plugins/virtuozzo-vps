@@ -1,1 +1,1 @@
-/root/cpaneldirect/provirted.phar delete {if $vps_vzid == "0"}{$vps_id}{else}{$vps_vzid|escapeshellarg}{/if};
+/root/cpaneldirect/provirted.phar delete --order-id={$id} {if $vps_vzid == "0"}{$vps_id}{else}{$vps_vzid|escapeshellarg}{/if};

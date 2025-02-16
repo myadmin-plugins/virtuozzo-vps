@@ -71,9 +71,9 @@ class Plugin
          * @var \MyAdmin\Settings $settings
          **/
         $settings = $event->getSubject();
+        $settings->setTarget('module');
         $settings->add_text_setting(self::$module, _('Slice Costs'), 'vps_slice_virtuozzo_cost', _('Virtuozzo VPS Cost Per Slice'), _('OpenVZ VPS will cost this much for 1 slice.'), $settings->get_setting('VPS_SLICE_VIRTUOZZO_COST'));
         $settings->add_text_setting(self::$module, _('Slice Costs'), 'vps_slice_ssd_virtuozzo_cost', _('SSD Virtuozzo VPS Cost Per Slice'), _('SSD OpenVZ VPS will cost this much for 1 slice.'), $settings->get_setting('VPS_SLICE_SSD_VIRTUOZZO_COST'));
-        $settings->setTarget('module');
         $settings->add_select_master(_(self::$module), _('Default Servers'), self::$module, 'new_vps_virtuozzo_server', _('Virtuozzo NJ Server'), NEW_VPS_VIRTUOZZO_SERVER, 12, 1);
         $settings->add_select_master(_(self::$module), _('Default Servers'), self::$module, 'new_vps_virtuozzo_la_server', _('Virtuozzo LA Server'), NEW_VPS_VIRTUOZZO_LA_SERVER, 12, 2);
         $settings->add_select_master(_(self::$module), _('Default Servers'), self::$module, 'new_vps_ssd_virtuozzo_server', _('SSD Virtuozzo NJ Server'), NEW_VPS_SSD_VIRTUOZZO_SERVER, 13, 1);

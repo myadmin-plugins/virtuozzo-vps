@@ -80,6 +80,7 @@ class Plugin
         $settings->add_dropdown_setting(self::$module, _('Out of Stock'), 'outofstock_virtuozzo', _('Out Of Stock Virtuozzo Secaucus'), _('Enable/Disable Sales Of This Type'), $settings->get_setting('OUTOFSTOCK_VIRTUOZZO'), ['0', '1'], ['No', 'Yes']);
         $settings->add_dropdown_setting(self::$module, _('Out of Stock'), 'outofstock_virtuozzo_la', _('Out Of Stock Virtuozzo Los Angeles'), _('Enable/Disable Sales Of This Type'), $settings->get_setting('OUTOFSTOCK_VIRTUOZZO_LA'), ['0', '1'], ['No', 'Yes']);
         $settings->add_dropdown_setting(self::$module, _('Out of Stock'), 'outofstock_virtuozzo_ny', _('Out Of Stock Virtuozzo New York'), _('Enable/Disable Sales Of This Type'), $settings->get_setting('OUTOFSTOCK_VIRTUOZZO_NY'), ['0', '1'], ['No', 'Yes']);
+        $settings->add_dropdown_setting(self::$module, _('Out of Stock'), 'outofstock_virtuozzo_tx', _('Out Of Stock Virtuozzo TX'), _('Enable/Disable Sales Of This Type'), $settings->get_setting('OUTOFSTOCK_VIRTUOZZO_TX'), ['0', '1'], ['No', 'Yes']);
         $settings->add_dropdown_setting(self::$module, _('Out of Stock'), 'outofstock_ssd_virtuozzo', _('Out Of Stock SSD Virtuozzo Secaucus'), _('Enable/Disable Sales Of This Type'), $settings->get_setting('OUTOFSTOCK_SSD_VIRTUOZZO'), ['0', '1'], ['No', 'Yes']);
         $settings->setTarget('global');
     }

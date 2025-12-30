@@ -1,1 +1,1 @@
-screen -dmS restore{$vps_id} /root/cpaneldirect/provirted.phar restore{if $module == 'quickservers'} --all{/if} {$param1|escapeshellarg} {$param2|escapeshellarg} {if $vps_vzid == "0"}{$vps_id}{else}{$vps_vzid|escapeshellarg}{/if} {$vps_id};
+screen -dmS backup{$vps_id} /root/cpaneldirect/provirted.phar restore{if $module == 'quickservers'} --all{/if} {$param1|escapeshellarg} {$param2|escapeshellarg} {if $vps_vzid == "0"}{$vps_id}{else}{$vps_vzid|escapeshellarg}{/if} {$vps_id};

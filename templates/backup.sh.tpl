@@ -1,1 +1,1 @@
-/root/cpaneldirect/provirted.phar backup {if $vps_vzid == "0"}{$vps_id}{else}{$vps_vzid|escapeshellarg}{/if} {$vps_id} {$email|escapeshellarg};
+screen -dmS backup{$vps_id} /root/cpaneldirect/provirted.phar backup{if $module == 'quickservers'} --all{/if} {if $vps_vzid == "0"}{$vps_id}{else}{$vps_vzid|escapeshellarg}{/if} {$vps_id} {$email|escapeshellarg};

@@ -38,26 +38,27 @@ class PluginTest extends TestCase
     }
 
     /**
-     * Clean up global state after each test.
+     * Clean up the App container after each test.
      *
      * @return void
      */
     protected function tearDown(): void
     {
-        unset($GLOBALS['tf']);
+        \MyAdmin\App::resetContainer();
         parent::tearDown();
     }
 
     /**
-     * Install a minimal $GLOBALS['tf'] stub so that get_service_define()
-     * can be called without hitting a real database.  The stub always
-     * returns -9999, which will never match a real service type.
+     * Install a minimal tf-like stub via the App container so
+     * MyAdmin\App::tf()->get_service_define() can be called without hitting
+     * a real database. The stub always returns -9999, which will never match
+     * a real service type.
      *
      * @return void
      */
     private function setUpGlobalTfStub(): void
     {
-        $GLOBALS['tf'] = new class {
+        $stub = new class {
             /**
              * @param string $name
              * @return int
@@ -67,6 +68,11 @@ class PluginTest extends TestCase
                 return -9999;
             }
         };
+        \MyAdmin\App::setContainer(
+            \MyAdmin\App\Testing\TestContainerBuilder::make()
+                ->withTf($stub)
+                ->build()
+        );
     }
 
     // ------------------------------------------------------------------

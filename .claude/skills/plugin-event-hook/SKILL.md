@@ -1,6 +1,6 @@
 ---
 name: plugin-event-hook
-description: Adds a new Symfony event hook to src/Plugin.php in the myadmin-virtuozzo-vps plugin. Handles registering in getHooks(), writing the static handler method with GenericEvent, service type guard, logging, and stopPropagation(). Use when user says 'add hook', 'new event handler', 'listen to event', or adds a handler method to Plugin.php. Do NOT use for modifying template files or adding template actions. NOTE: for a plugin's contract/behavioral tests (tests/ContractTest.php, the shared harness, composer myadmin:scaffold-tests) use the plugin-contract-tests skill instead — this skill's reflection-only guidance predates that harness.
+description: Adds a new Symfony event hook to src/Plugin.php in the myadmin-virtuozzo-vps plugin. Handles registering in getHooks(), writing the static handler method with GenericEvent, service type guard, logging, and stopPropagation(). Use when user says 'add hook', 'new event handler', 'listen to event', or adds a handler method to Plugin.php. Do NOT use for modifying template files or adding template actions. For a plugin's contract or behavioral tests (tests/ContractTest.php, the shared harness, composer myadmin:scaffold-tests) use the plugin-contract-tests skill instead — this skill's reflection-only guidance predates that harness.
 ---
 <!-- myadmin-contract-harness-notice -->
 > ### ⚠️ Read this before the rest of the file

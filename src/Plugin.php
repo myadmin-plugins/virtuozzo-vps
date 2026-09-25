@@ -85,6 +85,46 @@ class Plugin
     }
 
     /**
+     * Returns the copy of a rendered queue script that goes to the log: every
+     * root password the script was rendered with (rootpass, origrootpass, the
+     * stored *_rootpass, and the change_root param), in raw and shell-quoted
+     * form, is replaced. The script that is queued and executed is not changed.
+     *
+     * @param string $output the rendered script
+     * @param array  $serviceInfo the values the script was rendered with
+     * @return string
+     */
+    public static function redactQueueOutput($output, $serviceInfo)
+    {
+        $output = (string) $output;
+        if (!is_array($serviceInfo)) {
+            return $output;
+        }
+        $secrets = [];
+        foreach (['rootpass', 'origrootpass', 'vps_rootpass', 'qs_rootpass'] as $key) {
+            if (isset($serviceInfo[$key]) && is_scalar($serviceInfo[$key])) {
+                $secrets[] = (string) $serviceInfo[$key];
+            }
+        }
+        if (isset($serviceInfo['param']) && is_scalar($serviceInfo['param']) && preg_match('/pass|change_root/i', (string) ($serviceInfo['action'] ?? '')) === 1) {
+            $secrets[] = (string) $serviceInfo['param'];
+        }
+        $search = [];
+        foreach ($secrets as $secret) {
+            foreach ([$secret, escapeshellarg($secret), htmlspecialchars($secret, ENT_QUOTES)] as $form) {
+                if (trim($form, "' ") !== '') {
+                    $search[$form] = strlen($form);
+                }
+            }
+        }
+        if (count($search) == 0) {
+            return $output;
+        }
+        arsort($search);
+        return str_replace(array_keys($search), '[redacted]', $output);
+    }
+
+    /**
      * @param \Symfony\Component\EventDispatcher\GenericEvent $event
      */
     public static function getQueue(GenericEvent $event)
@@ -99,7 +139,7 @@ class Plugin
                 $smarty = new \TFSmarty();
                 $smarty->assign($serviceInfo);
                 $output = $smarty->fetch(__DIR__.'/../templates/'.$serviceInfo['action'].'.sh.tpl');
-                myadmin_log(self::$module, 'info', 'Queue '.$server_info[$settings['PREFIX'].'_name'].' '.$output, __LINE__, __FILE__, self::$module, $serviceInfo['vps_id'], true, false, $serviceInfo['vps_custid']);
+                myadmin_log(self::$module, 'info', 'Queue '.$server_info[$settings['PREFIX'].'_name'].' '.self::redactQueueOutput($output, $serviceInfo), __LINE__, __FILE__, self::$module, $serviceInfo['vps_id'], true, false, $serviceInfo['vps_custid']);
                 $event['output'] = $event['output'] . $output;
             }
             $event->stopPropagation();
